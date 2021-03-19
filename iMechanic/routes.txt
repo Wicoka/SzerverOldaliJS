@@ -1,0 +1,106 @@
+Szervizek és autók
+- index.html - login form (egy darab szöveg)
+- services.html - táblázat (edit, delete, autó hozzárendelése), új szerviz gomb
+- service-cars.html - szerviz adat, autók lista, autó törlése a szervizből és hozzárendelése
+- service.html - szerviz form, mentés és módosítás
+- cars.html - táblázat (edit, delete), új autó gomb
+- car.html - autó form, mentés és módosítás
+
+Routing
+
+renderMW.js
+
+middleware/auth/
+    checkPasswordMW.js
+    authMW.js
+
+middleware/service/
+    getServiceListMW.js
+    getServiceByIdMW.js
+    saveServiceMW.js
+    deleteServiceMW.js
+    addCarToServiceMW.js
+    deleteCarFromServiceMW.js
+
+middleware/car/
+    getCarListMW.js
+    getCarById:MW.js
+    saveCarMW.js
+    deleteCarMW.js
+
+
+GET, POST  /                        // Post (login) esetén jelszó ellenőrzés, ha jó, akkor szerivzekre redirect, ha nem, akkor vissza a főoldalra
+    checkPasswordMW
+    getServiceListMW
+    renderMW
+
+GET /service/list
+    authMW
+    getServiceListMW
+    renderMW(services.html)
+
+GET,POST /service/new
+    authMW
+    saveServiceMW
+    renderMW(service.html (new))
+        - ha volt valami érték beküldve -> form elemek azzal töltődjenek fel
+        - ha nem, akkor nem
+
+GET,POST /service/edit/:serviceid
+    authMW
+    getServiceByIdMW
+    saveServiceMW
+    renderMW(service.html (new))
+        - ha volt valami érték beküldve -> form elemek azzal töltődjenek fel
+        - ha nem, akkor nem
+
+GET /service/delete/:serviceid
+    authMW
+    getServiceByIdMW
+    deleteServiceMW
+
+GET /service/:serviceid/car/
+    authMW
+    getServiceByIdMW
+    getCarListMW
+    renderMW(service-cars.html)
+
+POST /service/:serviceid/car/:carid     - autó hozzáadása a szervizhez
+    authMW
+    getServiceByIdMW
+    getCarListMW
+    addCarToServiceMW
+    renderMW(service-cars.html)
+
+GET /service/:serviceid/car/:carid      - autó törlése a szervizből
+    authMW
+    getServiceByIdMW
+    getCarListMW
+    deleteCarFromServiceMW
+    renderMW(service-cars.html)
+
+GET /car/list
+    authMW
+    getCarListMW
+    renderMW(cars.html)
+
+POST /car/new
+    authMW
+    saveCarMW
+    renderMW(car.html (new))
+        - ha volt valami érték beküldve -> form elemek azzal töltődjenek fel
+        - ha nem, akkor nem
+
+GET,POST /car/:carid/edit
+    authMW
+    getCarByIdMW
+    saveCarMW
+    renderMW(car.html (new))
+        - ha volt valami érték beküldve -> form elemek azzal töltődjenek fel
+        - ha nem, akkor nem
+
+GET /car/delete/:carid
+    authMW
+    getCarByIdMW
+    deleteCarMW
+    renderMW(cars.html)
