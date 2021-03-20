@@ -4,8 +4,8 @@
 const requireOption = require('../requireOption');
 
 module.exports = function (objectrepository) {
-    return function (req, res, next) {
-        console.log('Check password MW');
-        next();
-    };
+  return function (req, res, next) {
+    console.log('Check password MW');
+    return next();
+  };
 };
