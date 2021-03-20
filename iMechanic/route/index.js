@@ -1,24 +1,19 @@
 const authMW = require('../middleware/auth/authMW');
-const checkPasswordMW = require('../middleware/auth/authMW');
-const deleteCarMW = require('../middleware/auth/authMW');
-const getCarByIdMW = require('../middleware/auth/authMW');
-const getCarListMW = require('../middleware/auth/authMW');
-const saveCarMW = require('../middleware/auth/authMW');
-const addCarToServiceMW = require('../middleware/auth/authMW');
-const deleteCarFromServiceMW = require('../middleware/auth/authMW');
-const deleteServiceMW = require('../middleware/auth/authMW');
-const getServiceByIdMW = require('../middleware/auth/authMW');
-const getServiceListMW = require('../middleware/auth/authMW');
-const saveServiceMW = require('../middleware/auth/authMW');
-const renderMW = require('../middleware/auth/authMW');
+const checkPasswordMW = require('../middleware/auth/checkPasswordMW');
+const deleteCarMW = require('../middleware/car/deleteCarMW');
+const getCarByIdMW = require('../middleware/car/getCarByIdMW');
+const getCarListMW = require('../middleware/car/getCarListMW');
+const saveCarMW = require('../middleware/car/saveCarMW');
+const addCarToServiceMW = require('../middleware/service/addCarToServiceMW');
+const deleteCarFromServiceMW = require('../middleware/service/deleteCarFromServiceMW');
+const deleteServiceMW = require('../middleware/service/deleteServiceMW');
+const getServiceByIdMW = require('../middleware/service/getServiceByIdMW');
+const getServiceListMW = require('../middleware/service/getServiceListMW');
+const saveServiceMW = require('../middleware/service/saveServiceMW');
+const renderMW = require('../middleware/renderMW');
 
 module.exports = function (app) {
     const objRepo = {};
-
-    app.use('/',
-        checkPassMW(objRepo),
-        getServiceListMW(objRepo),
-        renderMW(objRepo, 'index'));
 
     app.get('/service/list',
         authMW(objRepo),
@@ -55,15 +50,12 @@ module.exports = function (app) {
         getCarListMW(objRepo),
         deleteCarFromServiceMW(objRepo),
         renderMW(objRepo, 'service-cars'));
-    app.get('/car/list',
-        authMW(objRepo),
-        getCarListMW(objRepo),
-        renderMW(objRepo, 'cars'));
-    app.post('/car/new',
+
+    app.use('/car/new',
         authMW(objRepo),
         saveCarMW(objRepo),
         renderMW(objRepo, 'car'));
-    app.use('/car/:carid/edit',
+    app.use('/car/edit/:carid',
         authMW(objRepo),
         getCarByIdMW(objRepo),
         saveCarMW(objRepo),
@@ -73,4 +65,13 @@ module.exports = function (app) {
         getCarByIdMW(objRepo),
         deleteCarMW(objRepo),
         renderMW(objRepo, 'cars'));
+    app.get('/car/list',
+        authMW(objRepo),
+        getCarListMW(objRepo),
+        renderMW(objRepo, 'cars'));
+
+    app.use('/',
+        checkPasswordMW(objRepo),
+        getServiceListMW(objRepo),
+        renderMW(objRepo, 'index'));
 };
