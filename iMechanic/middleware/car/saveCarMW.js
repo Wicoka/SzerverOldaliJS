@@ -22,6 +22,7 @@ module.exports = function (objectrepository) {
     res.locals.car.brand = req.body.brand;
     res.locals.car.licencePlate = req.body.licencePlate;
     res.locals.car.chassisNumber = req.body.chassisNumber;
+    res.locals.car._service = null;
 
     res.locals.car.save(err => {
       if (err) {

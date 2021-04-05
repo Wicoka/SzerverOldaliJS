@@ -12,6 +12,7 @@ module.exports = function (objectrepository) {
       _id: req.params.serviceid
     }, (err, service) => {
       if (err) {
+        console.log('HIBA VAN EMBER');
         return next(err);
       }
       res.locals.service = service;

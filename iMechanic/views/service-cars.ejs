@@ -19,8 +19,7 @@
                             </thead>
                             <tbody>
                                 <% cars.forEach(function(car){ %>
-
-                                    <% if (car.serviceId===service._id) { %>
+                                    <% if (service._cars.includes(car._id)) { %>
                                         <tr>
                                             <td class="align-middle">
                                                 <%= car.name %>
@@ -35,7 +34,9 @@
                                                 <%= car.chassisNumber %>
                                             </td>
                                             <td>
-                                                <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                                <a class="btn btn-danger"
+                                                    href="/service/<%= service._id %>/car/<%= car._id %>/delete"><i
+                                                        class="fas fa-trash"></i></a>
                                             </td>
                                         </tr>
                                         <% } %>
@@ -57,7 +58,7 @@
                             </thead>
                             <tbody>
                                 <% cars.forEach(function(car){ %>
-                                    <% if (car.serviceId !==service._id) { %>
+                                    <% if (!service._cars.includes(car._id) && car._service===null){ %>
                                         <tr>
                                             <td class="align-middle">
                                                 <%= car.name %>
@@ -72,7 +73,9 @@
                                                 <%= car.chassisNumber %>
                                             </td>
                                             <td>
-                                                <a class="btn btn-success"><i class="fas fa-plus"></i></a>
+                                                <a class="btn btn-success"
+                                                    href="/service/<%= service._id %>/car/<%= car._id %>/add"><i
+                                                        class="fas fa-plus"></i></a>
                                             </td>
                                         </tr>
                                         <% } %>

@@ -39,22 +39,20 @@ module.exports = function (app) {
         getServiceByIdMW(objRepo),
         deleteServiceMW(objRepo));
 
+    app.get('/service/:serviceid/car/:carid/add',
+        authMW(objRepo),
+        getServiceByIdMW(objRepo),
+        getCarByIdMW(objRepo),
+        addCarToServiceMW(objRepo));
+    app.get('/service/:serviceid/car/:carid/delete',
+        authMW(objRepo),
+        getServiceByIdMW(objRepo),
+        getCarByIdMW(objRepo),
+        deleteCarFromServiceMW(objRepo));
     app.get('/service/:serviceid/car',
         authMW(objRepo),
         getServiceByIdMW(objRepo),
         getCarListMW(objRepo),
-        renderMW(objRepo, 'service-cars'));
-    app.post('/service/:serviceid/car/:carid',
-        authMW(objRepo),
-        getServiceByIdMW(objRepo),
-        getCarListMW(objRepo),
-        addCarToServiceMW(objRepo),
-        renderMW(objRepo, 'service-cars'));
-    app.get('/service/:serviceid/car/:carid',
-        authMW(objRepo),
-        getServiceByIdMW(objRepo),
-        getCarListMW(objRepo),
-        deleteCarFromServiceMW(objRepo),
         renderMW(objRepo, 'service-cars'));
 
     app.use('/car/new',

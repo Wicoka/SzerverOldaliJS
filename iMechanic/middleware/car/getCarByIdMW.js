@@ -12,7 +12,6 @@ module.exports = function (objectrepository) {
       if (err) {
         return next(err);
       }
-      console.log('CAr', car);
       res.locals.car = car;
       return next();
     });
