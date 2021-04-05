@@ -4,15 +4,18 @@
 const requireOption = require('../requireOption');
 
 module.exports = function (objectrepository) {
+  const ServiceModel = requireOption(objectrepository, 'ServiceModel');
   return function (req, res, next) {
-    console.log('Get service by ID MW');
-    res.locals.service = {
-      _id: 1,
-      name: 'iMechanic Győr',
-      address: '9000 Győr, Széchenyi tér 2',
-      carCount: 0,
-      licencePlates: []
-    };
-    next();
+    // TODO: HIBA
+    // Argument passed in must be a single String of 12 bytes or a string of 24 hex characters
+    ServiceModel.findOne({
+      _id: req.params.serviceid
+    }, (err, service) => {
+      if (err) {
+        return next(err);
+      }
+      res.locals.service = service;
+      return next();
+    });
   };
 };

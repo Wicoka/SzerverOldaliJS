@@ -12,8 +12,14 @@ const getServiceListMW = require('../middleware/service/getServiceListMW');
 const saveServiceMW = require('../middleware/service/saveServiceMW');
 const renderMW = require('../middleware/renderMW');
 
+const CarModel = require('../models/car');
+const ServiceModel = require('../models/service');
+
 module.exports = function (app) {
-    const objRepo = {};
+    const objRepo = {
+        CarModel: CarModel,
+        ServiceModel: ServiceModel
+    };
 
     app.get('/service/list',
         authMW(objRepo),
