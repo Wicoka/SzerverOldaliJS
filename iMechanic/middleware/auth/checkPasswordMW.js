@@ -5,7 +5,17 @@ const requireOption = require('../requireOption');
 
 module.exports = function (objectrepository) {
   return function (req, res, next) {
-    console.log('Check password MW');
+    if (typeof req.body.password === 'undefined' || typeof req.body.username === 'undefined') {
+      return next();
+    }
+    if (req.body.password === 'admin' || req.body.username === 'admin') {
+      req.session.isAuthenticated = true;
+      return req.session.save(err => {
+        console.log('MENTVE');
+        console.log(req.session);
+        return res.redirect('/service/list');
+      });
+    }
     return next();
   };
 };

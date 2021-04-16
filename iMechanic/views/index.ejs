@@ -5,16 +5,16 @@
                 <div class="row justify-content-md-center">
                     <div class="col-lg-6 col mt-5">
                         <h1>iMechanic</h1>
-                        <form>
+                        <form method="POST">
                             <div class="mb-3">
                                 <label for="username" class="form-label">Felhasználónév</label>
-                                <input type="text" class="form-control" id="username">
+                                <input type="text" class="form-control" id="username" name="username">
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Jelszó</label>
-                                <input type="password" class="form-control" id="password">
+                                <input type="password" class="form-control" id="password" name="password">
                             </div>
-                            <a type="submit" class="btn btn-primary" href="service/list">Bejelentkezés</a>
+                            <input type="submit" class="btn btn-primary" value="Bejelentkezés" />
                         </form>
                     </div>
                 </div>

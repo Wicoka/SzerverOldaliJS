@@ -11,6 +11,7 @@ const getServiceByIdMW = require('../middleware/service/getServiceByIdMW');
 const getServiceListMW = require('../middleware/service/getServiceListMW');
 const saveServiceMW = require('../middleware/service/saveServiceMW');
 const renderMW = require('../middleware/renderMW');
+const logoutMW = require('../middleware/auth/logoutMW');
 
 const CarModel = require('../models/car');
 const ServiceModel = require('../models/service');
@@ -73,6 +74,9 @@ module.exports = function (app) {
         authMW(objRepo),
         getCarListMW(objRepo),
         renderMW(objRepo, 'cars'));
+
+    app.use('/logout',
+        logoutMW(objRepo));
 
     app.use('/',
         checkPasswordMW(objRepo),
