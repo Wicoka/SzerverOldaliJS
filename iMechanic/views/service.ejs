@@ -1,0 +1,35 @@
+<%- include('header') %>
+    <%- include('navbar') %>
+        <main>
+            <div class="container">
+                <div class="row justify-content-md-center">
+                    <div class="col-lg-6 col mt-5">
+                        <h1>
+                            Szerviz
+                            <% if (typeof service==='undefined' ) { %>
+                                hozzáadása
+                                <% } else { %>
+                                    módosítása
+                                    <% } %>
+                        </h1>
+                        <form method="POST">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Név</label>
+                                <input type="text" class="form-control" id="name" name="name"
+                                    value="<%= (typeof service === 'undefined') ? '' : service.name %>" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="address" class="form-label">Cím</label>
+                                <input type="text" class="form-control" id="address" name="address"
+                                    value="<%= (typeof service === 'undefined') ? '' : service.address %>" />
+                            </div>
+                            <div class="d-flex justify-content-around">
+                                <a class="btn btn-danger" href="/service/list">Mégsem</a>
+                                <input type="submit" class="btn btn-primary" href="/service/list" value="Mentés" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <%- include('footer') %>

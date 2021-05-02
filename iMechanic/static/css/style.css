@@ -1,0 +1,13 @@
+h1 {
+    text-align: center;
+}
+
+.relative-wrapper {
+    position: relative;
+}
+
+.add-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+}

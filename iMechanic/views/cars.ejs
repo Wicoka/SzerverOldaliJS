@@ -1,0 +1,54 @@
+<%- include('header') %>
+    <%- include('navbar') %>
+        <main>
+            <div class="container">
+                <div class="row">
+                    <div class="col mt-5">
+                        <h1>Autók</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Név</th>
+                                    <th scope="col">Márka</th>
+                                    <th scope="col">Rendszám</th>
+                                    <th scope="col">Alvázszám</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% cars.forEach(function(car){ %>
+                                    <tr>
+                                        <td class="align-middle">
+                                            <%= car.name %>
+                                        </td>
+                                        <td class="align-middle">
+                                            <%= car.brand %>
+                                        </td>
+                                        <td class="align-middle">
+                                            <%= car.licencePlate %>
+                                        </td>
+                                        <td class="align-middle">
+                                            <%= car.chassisNumber %>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-primary" href="/car/edit/<%= car._id %> "><i
+                                                    class="fas fa-edit"></i></a>
+                                            <a class="btn btn-danger" href="/car/delete/<%= car._id %> "><i
+                                                    class="fas fa-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                    <% }); %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <a class="btn btn-primary add-button mt-2" href="/car/new">
+                    Autó hozzáadása
+                </a>
+            </div>
+        </main>
+        <%- include('footer') %>
